@@ -17,11 +17,20 @@ const {
 const DarkTheme: Theme = {
   name: "dark",
   layout: {
-    // container: new CSSProperties({ backgroundColor: white.darken(0.05) }),
     container: new CSSProperties({
       backgroundColor: black.brighten(0.05),
       color: white,
     }),
+  },
+  card: {
+    card: new CSSProperties({
+      backgroundColor: black.brighten(0.25),
+      borderColor: white.darken(0.35),
+      color: white,
+    }),
+    title: new CSSProperties({ color: white }),
+    subTitle: new CSSProperties({ color: white.darken(0.35) }),
+    dismissal: new CSSProperties({ color: white }),
   },
   cytoscape: {
     canvas: [
@@ -30,18 +39,19 @@ const DarkTheme: Theme = {
         style: {
           label: "data(label)",
           "text-valign": "bottom",
+          color: white.rgba(),
         },
       },
       {
         selector: "node[?hover]",
         style: {
-          backgroundColor: black.rgba(),
+          backgroundColor: white.darken(0.25).rgba(),
         },
       },
       {
         selector: "node[!hover]",
         style: {
-          backgroundColor: gray.rgba(),
+          backgroundColor: white.darken(0.1).rgba(),
         },
       },
       {

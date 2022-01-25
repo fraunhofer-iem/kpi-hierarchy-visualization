@@ -2,7 +2,7 @@ import { ElementDefinition, NodeDataDefinition } from "cytoscape"
 
 export const Node = (
   kind: string,
-  id: number,
+  id: string | number,
   label: string,
   additionalAttributes: Omit<
     NodeDataDefinition,

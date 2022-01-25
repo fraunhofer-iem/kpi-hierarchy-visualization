@@ -19,6 +19,15 @@ const LightTheme: Theme = {
   layout: {
     container: new CSSProperties({ backgroundColor: white.darken(0.05) }),
   },
+  card: {
+    card: new CSSProperties({
+      backgroundColor: white.darken(0.01),
+      borderColor: gray,
+    }),
+    title: new CSSProperties({ color: black }),
+    subTitle: new CSSProperties({ color: white.darken(0.65) }),
+    dismissal: new CSSProperties({ color: black }),
+  },
   cytoscape: {
     canvas: [
       {

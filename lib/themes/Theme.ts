@@ -5,6 +5,12 @@ export type Theme = {
   layout: {
     container: CSSProperties
   }
+  card: {
+    card: CSSProperties
+    title: CSSProperties
+    subTitle: CSSProperties
+    dismissal: CSSProperties
+  }
   cytoscape: {
     canvas: cytoscape.Stylesheet[]
   }

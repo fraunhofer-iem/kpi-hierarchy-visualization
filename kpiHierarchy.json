@@ -1,0 +1,65 @@
+[
+  {
+    "id": "pokemon-mainline",
+    "name": "Pokemon Games (mainline)",
+    "description": "8 generations and 34 games",
+    "children": ["gen-1", "gen-2"],
+    "parents": []
+  },
+  {
+    "id": "gen-1",
+    "name": "Generation 1",
+    "description": "Kanto",
+    "children": ["red", "blue", "yellow"],
+    "parents": ["pokemon-mainline"]
+  },
+  {
+    "id": "red",
+    "name": "Red version",
+    "description": "Charizard",
+    "children": [],
+    "parents": ["gen-1"]
+  },
+  {
+    "id": "blue",
+    "name": "Blue version",
+    "description": "Blastoise",
+    "children": [],
+    "parents": ["gen-1"]
+  },
+  {
+    "id": "yellow",
+    "name": "Yellow Version",
+    "description": "Pikachu",
+    "children": [],
+    "parents": ["gen-1"]
+  },
+  {
+    "id": "gen-2",
+    "name": "Generation 2",
+    "description": "Johto",
+    "children": ["gold", "silver", "crystal"],
+    "parents": ["pokemon-mainline"]
+  },
+  {
+    "id": "gold",
+    "name": "Gold version",
+    "description": "Ho-Oh",
+    "children": [],
+    "parents": ["gen-2"]
+  },
+  {
+    "id": "silver",
+    "name": "Silver version",
+    "description": "Lugia",
+    "children": [],
+    "parents": ["gen-2"]
+  },
+  {
+    "id": "crystal",
+    "name": "Crystal Version",
+    "description": "Suicune",
+    "children": [],
+    "parents": ["gen-2"]
+  }
+]

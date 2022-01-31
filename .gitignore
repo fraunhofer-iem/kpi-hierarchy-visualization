@@ -106,4 +106,6 @@ dist
 # IDEs
 *.code-workspace
 
+# Various things
+.DS_Store
 kpiHierarchy.json

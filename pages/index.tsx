@@ -1,6 +1,7 @@
 import { NextPage } from "next"
 import { useCallback, useRef } from "react"
 import tippyfy, { TooltipControl } from "tooltip-component"
+import { Description } from "../components/content/Description"
 import CytoscapeComponent from "../components/cytoscape/CytoscapeComponent"
 import { Page } from "../components/layout"
 import hierarchy from "../hierarchy.json"
@@ -9,6 +10,7 @@ import { useUIContext } from "../lib/hooks"
 
 const Landing: NextPage = tippyfy((props: TooltipControl) => {
   const { theme } = useUIContext()
+  const selectNode = useRef<(node: cytoscape.NodeSingular) => void>()
   const cy = useRef<cytoscape.Core | null>()
   const { setTippy } = props
   const elements: cytoscape.ElementDefinition[] = []
@@ -89,9 +91,29 @@ const Landing: NextPage = tippyfy((props: TooltipControl) => {
         }
       })
 
+      c.on("tap", "node", (event) => {
+        const node: cytoscape.NodeSingular = event.target
+        if (!node.isParent()) {
+          if (!node.data("tapped")) {
+            c.nodes().removeData("tapped")
+            node.data("tapped", true)
+            selectNode.current(node)
+          } else {
+            node.removeData("tapped")
+            selectNode.current(undefined)
+          }
+        }
+      })
       cy.current = c
     },
     [setTippy],
+  )
+
+  const descriptionControl = useCallback(
+    (nodeSelector: (node: cytoscape.NodeSingular) => void) => {
+      selectNode.current = nodeSelector
+    },
+    [],
   )
 
   return (
@@ -104,6 +126,7 @@ const Landing: NextPage = tippyfy((props: TooltipControl) => {
           stylesheet={theme.cytoscape?.canvas}
         />
       </div>
+      <Description descriptionControl={descriptionControl} />
     </Page>
   )
 })

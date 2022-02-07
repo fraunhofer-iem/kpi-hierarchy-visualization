@@ -28,6 +28,25 @@ const LightTheme: Theme = {
     subTitle: new CSSProperties({ color: white.darken(0.65) }),
     dismissal: new CSSProperties({ color: black }),
   },
+  button: {
+    neutral: new CSSProperties({
+      backgroundColor: transparent,
+      color: "inherit",
+    }),
+    "neutral:hover": new CSSProperties({
+      backgroundColor: transparent,
+      color: "inherit",
+    }),
+    anchor: new CSSProperties({
+      backgroundColor: transparent,
+      color: "inherit",
+      textDecoration: "underline",
+    }),
+    "anchor:hover": new CSSProperties({
+      backgroundColor: transparent,
+      textDecoration: "none",
+    }),
+  },
   cytoscape: {
     canvas: [
       {

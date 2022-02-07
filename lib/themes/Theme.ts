@@ -11,6 +11,12 @@ export type Theme = {
     subTitle: CSSProperties
     dismissal: CSSProperties
   }
+  button: {
+    neutral: CSSProperties
+    "neutral:hover": CSSProperties
+    anchor: CSSProperties
+    "anchor:hover": CSSProperties
+  }
   cytoscape: {
     canvas: cytoscape.Stylesheet[]
   }

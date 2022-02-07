@@ -5,6 +5,13 @@
   text-decoration: none;
   border: 1px solid;
   border-radius: 5px;
+  overflow: scroll;
+  position: relative;
+}
+
+.card .cardControls {
+  width: 100%;
+  text-align: center;
 }
 
 .card .cardDismissal {

@@ -36,3 +36,4 @@ yarn-error.log*
 .vercel
 
 kpiHierarchy.json
+hierarchy.json

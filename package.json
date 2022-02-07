@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "cytoscape": "^3.20.0",
+    "cytoscape-cola": "^2.5.0",
     "cytoscape-dagre": "^2.3.2",
     "cytoscape-popper": "^2.0.0",
     "deep-equal": "^2.0.5",

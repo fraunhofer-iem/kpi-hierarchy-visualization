@@ -35,10 +35,20 @@ const DarkTheme: Theme = {
   cytoscape: {
     canvas: [
       {
+        selector: "node",
+        style: {
+          "border-style": "solid",
+          "border-width": "1px",
+          "border-color": "white",
+          shape: "rectangle",
+          width: "label",
+        },
+      },
+      {
         selector: "node[label]",
         style: {
           label: "data(label)",
-          "text-valign": "bottom",
+          "text-valign": "center",
           color: white.rgba(),
         },
       },
@@ -51,7 +61,15 @@ const DarkTheme: Theme = {
       {
         selector: "node[!hover]",
         style: {
-          backgroundColor: white.darken(0.1).rgba(),
+          backgroundColor: white.darken(0.8).rgba(),
+        },
+      },
+      {
+        selector: "$node > node",
+        style: {
+          "border-width": "0px",
+          shape: "rectangle",
+          backgroundColor: black.brighten(0.05).rgba(),
         },
       },
       {
@@ -61,7 +79,39 @@ const DarkTheme: Theme = {
           "line-color": white.darken(0.2).rgba(),
           "target-arrow-color": white.darken(0.2).rgba(),
           "target-arrow-shape": "triangle",
+          "loop-direction": "90deg",
+          color: white.rgba(),
+        },
+      },
+      {
+        selector: "edge[sourceLabel]",
+        style: {
+          "source-label": "data(sourceLabel)",
+        },
+      },
+      {
+        selector: "edge[targetLabel]",
+        style: {
+          "target-label": "data(targetLabel)",
+        },
+      },
+      {
+        selector: "edge[label]",
+        style: {
+          label: "data(label)",
+        },
+      },
+      {
+        selector: "edge[?straight]",
+        style: {
+          "curve-style": "bezier",
+        },
+      },
+      {
+        selector: "edge[!straight]",
+        style: {
           "curve-style": "taxi",
+          "taxi-turn": "100px",
         },
       },
     ],

@@ -31,22 +31,40 @@ const LightTheme: Theme = {
   cytoscape: {
     canvas: [
       {
+        selector: "node",
+        style: {
+          "border-style": "solid",
+          "border-width": "1px",
+          "border-color": white.darken(0.1).rgba(),
+          shape: "rectangle",
+          width: "label",
+        },
+      },
+      {
         selector: "node[label]",
         style: {
           label: "data(label)",
-          "text-valign": "bottom",
+          "text-valign": "center",
         },
       },
       {
         selector: "node[?hover]",
         style: {
-          backgroundColor: black.rgba(),
+          backgroundColor: white.darken(0.03).rgba(),
         },
       },
       {
         selector: "node[!hover]",
         style: {
-          backgroundColor: gray.rgba(),
+          backgroundColor: white.darken(0.01).rgba(),
+        },
+      },
+      {
+        selector: "$node > node",
+        style: {
+          "border-width": "0px",
+          shape: "rectangle",
+          backgroundColor: white.darken(0.05).rgba(),
         },
       },
       {
@@ -56,7 +74,39 @@ const LightTheme: Theme = {
           "line-color": white.darken(0.2).rgba(),
           "target-arrow-color": white.darken(0.2).rgba(),
           "target-arrow-shape": "triangle",
+          "loop-direction": "90deg",
           "curve-style": "taxi",
+        },
+      },
+      {
+        selector: "edge[sourceLabel]",
+        style: {
+          "source-label": "data(sourceLabel)",
+        },
+      },
+      {
+        selector: "edge[targetLabel]",
+        style: {
+          "target-label": "data(targetLabel)",
+        },
+      },
+      {
+        selector: "edge[label]",
+        style: {
+          label: "data(label)",
+        },
+      },
+      {
+        selector: "edge[?straight]",
+        style: {
+          "curve-style": "bezier",
+        },
+      },
+      {
+        selector: "edge[!straight]",
+        style: {
+          "curve-style": "taxi",
+          "taxi-turn": "100px",
         },
       },
     ],

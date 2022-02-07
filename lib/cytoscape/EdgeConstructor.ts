@@ -8,8 +8,9 @@ export const Edge = (
     EdgeDataDefinition,
     "id" | "source" | "target" | "directed"
   > = {},
+  style: any = undefined,
 ): ElementDefinition => {
-  return {
+  const edge = {
     data: {
       id: `${source}-${target}`,
       source: source,
@@ -18,4 +19,8 @@ export const Edge = (
       ...additionalAttributes,
     },
   }
+  if (style !== undefined) {
+    edge["style"] = style
+  }
+  return edge
 }

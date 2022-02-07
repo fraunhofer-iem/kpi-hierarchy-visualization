@@ -17,9 +17,6 @@ export const register = function (cytoscape: any) {
         currentNode.style("shape", "diamond")
       }
     })
-    this.edges().forEach((currentEdge) => {
-      currentEdge.style("visibility", "hidden")
-    })
   })
 
   cytoscape("collection", "expanded", function (this: cytoscape.Collection) {

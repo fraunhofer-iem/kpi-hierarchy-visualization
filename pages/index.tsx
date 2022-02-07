@@ -1,10 +1,9 @@
 import { NextPage } from "next"
 import { useCallback, useRef } from "react"
 import tippyfy, { TooltipControl } from "tooltip-component"
-import { Card } from "../components/card"
 import CytoscapeComponent from "../components/cytoscape/CytoscapeComponent"
 import { Page } from "../components/layout"
-import kpis from "../kpiHierarchy.json"
+import hierarchy from "../hierarchy.json"
 import { Edge, Node } from "../lib/cytoscape"
 import { useUIContext } from "../lib/hooks"
 
@@ -14,49 +13,80 @@ const Landing: NextPage = tippyfy((props: TooltipControl) => {
   const { setTippy } = props
   const elements: cytoscape.ElementDefinition[] = []
 
-  kpis.forEach((currentKpi) => {
-    elements.push(
-      Node("unspecified", currentKpi.id, currentKpi.name, {
-        description: currentKpi.description,
-        hover: false,
-      }),
-    )
-    currentKpi.children.forEach((currentChild) => {
-      elements.push(Edge(currentKpi.id, currentChild))
-    })
-  })
+  hierarchy.nodes.forEach(
+    (currentNode: {
+      id: string
+      layout?: any
+      name?: string
+      description?: string
+      children?: { id: string; name: string; description: string }[]
+    }) => {
+      elements.push(
+        Node({
+          id: currentNode.id,
+          label: currentNode.name ?? "",
+          additionalAttributes: {
+            description: currentNode.description,
+            layout: currentNode.layout,
+          },
+        }),
+      )
+      currentNode.children?.forEach((currentChild) => {
+        elements.push(
+          Node({
+            id: currentChild.id,
+            label: currentChild.name,
+            additionalAttributes: {
+              description: currentChild.description,
+              parent: currentNode.id,
+            },
+          }),
+        )
+      })
+    },
+  )
+  hierarchy.edges.forEach(
+    (currentEdge: {
+      source: string
+      target: string
+      sourceLabel?: string
+      targetLabel?: string
+      label?: string
+      straight?: boolean
+    }) => {
+      elements.push(
+        Edge(currentEdge.source, currentEdge.target, true, {
+          label: currentEdge.label,
+          sourceLabel: currentEdge.sourceLabel,
+          targetLabel: currentEdge.targetLabel,
+          straight: currentEdge.straight,
+        }),
+      )
+    },
+  )
 
   const cytoscapeControl = useCallback(
     (c: cytoscape.Core) => {
       if (cy.current == c) {
         return
       }
-
-      // Initializes nodeExpansion plugin, setting the 'expanded' attribute and hiding all child nodes and their edges
-      c.nodeExpansion()
-
-      c.on("tap", "node", (event) => {
-        const node: cytoscape.NodeSingular = event.target
-        if (!node.expanded()) {
-          node.expand()
-        } else {
-          node.collapse()
-        }
-      })
-
       c.on("mouseover", "node", (event) => {
         const node: cytoscape.NodeSingular = event.target
-        setTippy(node.id(), {
-          content: <Card width="250px">{node.data("description")}</Card>,
-          popperRef: node.popperRef(),
-          dispose: () => node.data("hover", false),
-          tippyProps: { placement: "right" },
-        })
-        node.data("hover", true)
+        if (!node.isParent()) {
+          setTippy(node.id(), {
+            content: <></>,
+            popperRef: node.popperRef(),
+            dispose: () => node.data("hover", false),
+            tippyProps: { placement: "right" },
+          })
+          node.data("hover", true)
+        }
       })
       c.on("mouseout", "node", (event) => {
         const node: cytoscape.NodeSingular = event.target
-        setTippy(node.id(), { content: undefined, popperRef: undefined })
+        if (!node.isParent()) {
+          setTippy(node.id(), { content: undefined, popperRef: undefined })
+        }
       })
 
       cy.current = c
@@ -70,11 +100,7 @@ const Landing: NextPage = tippyfy((props: TooltipControl) => {
         <CytoscapeComponent
           cy={cytoscapeControl}
           elements={elements}
-          layout={{
-            name: "dagre",
-            nodeDimensionsIncludeLabels: true,
-            fit: false,
-          }}
+          layout={hierarchy.layout}
           stylesheet={theme.cytoscape?.canvas}
         />
       </div>

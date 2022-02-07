@@ -1,10 +1,10 @@
 import cytoscape from "cytoscape"
+import cola from "cytoscape-cola"
 import dagre from "cytoscape-dagre"
 import popper from "cytoscape-popper"
 import { useEffect, useRef } from "react"
 import { nodeExpansion } from "../../lib/cytoscape/extensions"
 import { compareProps } from "../../lib/frontend"
-
 interface Props {
   /**
    * Return the Cytoscape Core to the parent component.
@@ -27,11 +27,18 @@ export default function CytoscapeComponent(props: Props) {
   useEffect(() => {
     if (!compareProps(prevProps.current, props)) {
       cytoscape.use(dagre)
+      cytoscape.use(cola)
       cy.current = cytoscape({
         container: container.current,
         layout: layout,
         elements: elements,
         style: stylesheet,
+      })
+      const compoundNodes = cy.current.nodes("$node > node")
+      compoundNodes.forEach((currentNode) => {
+        if (currentNode.data("layout")) {
+          currentNode.descendants().layout(currentNode.data("layout")).run()
+        }
       })
       cy.current.fit()
 

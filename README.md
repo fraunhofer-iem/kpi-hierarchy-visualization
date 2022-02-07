@@ -6,6 +6,7 @@ After cloning this repository, you need to add the file `hierarchy.json` to the 
 ```ts
 {
   layout: cytoscape.LayoutOptions, // a native CytoscapeJS layout (or cytoscape-dagre) which will be applied to all nodes
+  readme: string, // general information on the displayed hierarchy
   nodes: [
     // single node
     {
@@ -31,7 +32,7 @@ After cloning this repository, you need to add the file `hierarchy.json` to the 
       {
         source: string, // ID of the source node
         target: string, // ID of the target node
-        label: string | undefined
+        label: string | undefined,
         sourceLabel: string | undefined,
         targetLabel: string | undefined,
         straight: boolean | undefined // if true, edge is set to 'curve-style: bezier' instead of 'curve-style: taxi'

@@ -3,6 +3,7 @@ import { useState } from "react"
 import { Card, CardControls } from "../card"
 
 interface Props {
+  readme?: string
   descriptionControl: (
     nodeSelector: (node: cytoscape.NodeSingular) => void,
   ) => void
@@ -14,7 +15,7 @@ export function Description(props: Props) {
 
   props.descriptionControl(selectNode)
 
-  return selectedNode ? (
+  return (
     <div
       style={{
         position: "absolute",
@@ -24,17 +25,12 @@ export function Description(props: Props) {
       }}
     >
       <Card width="100%" height={enlarged ? "75vh" : "150px"} margin="0">
-        <CardControls
-          action={() => setEnlarged(!enlarged)}
-          dismiss={() => {
-            selectedNode.removeData("tapped")
-            selectNode(undefined)
-          }}
-        />
-        <Markdown>{selectedNode.data("description")}</Markdown>
+        <CardControls action={() => setEnlarged(!enlarged)} />
+
+        <Markdown>
+          {selectedNode ? selectedNode.data("description") : props.readme}
+        </Markdown>
       </Card>
     </div>
-  ) : (
-    <></>
   )
 }

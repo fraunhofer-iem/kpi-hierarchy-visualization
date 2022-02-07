@@ -90,7 +90,10 @@ const Landing: NextPage = tippyfy((props: TooltipControl) => {
           setTippy(node.id(), { content: undefined, popperRef: undefined })
         }
       })
-
+      c.on("tap", () => {
+        c.nodes().removeData("tapped")
+        selectNode.current(undefined)
+      })
       c.on("tap", "node", (event) => {
         const node: cytoscape.NodeSingular = event.target
         if (!node.isParent()) {
@@ -118,7 +121,7 @@ const Landing: NextPage = tippyfy((props: TooltipControl) => {
 
   return (
     <Page title={"Test"}>
-      <div style={{ height: "100vh", width: "100%" }}>
+      <div style={{ height: "calc(100vh - 150px)", width: "100%" }}>
         <CytoscapeComponent
           cy={cytoscapeControl}
           elements={elements}
@@ -126,7 +129,10 @@ const Landing: NextPage = tippyfy((props: TooltipControl) => {
           stylesheet={theme.cytoscape?.canvas}
         />
       </div>
-      <Description descriptionControl={descriptionControl} />
+      <Description
+        readme={hierarchy.readme}
+        descriptionControl={descriptionControl}
+      />
     </Page>
   )
 })

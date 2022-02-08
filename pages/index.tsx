@@ -120,7 +120,7 @@ const Landing: NextPage = tippyfy((props: TooltipControl) => {
   )
 
   return (
-    <Page title={"Test"}>
+    <Page title={hierarchy.title}>
       <div style={{ height: "calc(100vh - 150px)", width: "100%" }}>
         <CytoscapeComponent
           cy={cytoscapeControl}

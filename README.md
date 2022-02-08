@@ -7,6 +7,7 @@ After cloning this repository, you need to add the file `hierarchy.json` to the 
 {
   layout: cytoscape.LayoutOptions, // a native CytoscapeJS layout (or cytoscape-dagre) which will be applied to all nodes
   readme: string, // general information on the displayed hierarchy
+  title: string, // page title
   nodes: [
     // single node
     {

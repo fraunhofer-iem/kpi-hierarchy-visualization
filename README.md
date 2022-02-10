@@ -13,7 +13,7 @@ After cloning this repository, you need to add the file `hierarchy.json` to the 
     {
       id: string,
       name: string,
-      description: string
+      description: string // Markdown will be rendered in the information card
     }
     |
     // compound node
@@ -25,7 +25,7 @@ After cloning this repository, you need to add the file `hierarchy.json` to the 
         {
           id: string,
           name: string,
-          description: string
+          description: string // Markdown will be rendered in the information card
         }
       ]
     },

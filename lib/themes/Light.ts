@@ -45,6 +45,7 @@ const LightTheme: Theme = {
     "anchor:hover": new CSSProperties({
       backgroundColor: transparent,
       textDecoration: "none",
+      color: "inherit",
     }),
   },
   cytoscape: {
@@ -57,6 +58,12 @@ const LightTheme: Theme = {
           "border-color": white.darken(0.1).rgba(),
           shape: "rectangle",
           width: "label",
+        },
+      },
+      {
+        selector: "node[?hidden]",
+        style: {
+          visibility: "hidden",
         },
       },
       {

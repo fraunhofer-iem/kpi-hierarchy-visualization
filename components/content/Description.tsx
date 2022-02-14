@@ -31,21 +31,39 @@ export function Description(props: Props) {
         <Markdown
           options={{
             createElement: (tag, elementProps, ...children) => {
-              if (tag === "a" && elementProps["href"].endsWith(".md")) {
-                // description references other document
-                return (
-                  <Button
-                    context={"anchor"}
-                    display={"inline"}
-                    padding={"0"}
-                    action={() =>
-                      props.simulateTap(elementProps["href"].split(".")[0])
-                    }
-                    key={elementProps["key"]}
-                  >
-                    {children}
-                  </Button>
-                )
+              if (tag === "br") {
+                return <br key={elementProps["key"]} />
+              }
+              if (tag === "a") {
+                if (elementProps["href"].endsWith(".md")) {
+                  // description references other document
+                  return (
+                    <Button
+                      context={"anchor"}
+                      display={"inline"}
+                      padding={"0"}
+                      action={() =>
+                        props.simulateTap(elementProps["href"].split(".")[0])
+                      }
+                      key={elementProps["key"]}
+                    >
+                      {children}
+                    </Button>
+                  )
+                } else {
+                  // outgoing link
+                  return (
+                    <Button
+                      context={"anchor"}
+                      display={"inline"}
+                      padding={"0"}
+                      href={elementProps["href"]}
+                      key={elementProps["key"]}
+                    >
+                      {children}
+                    </Button>
+                  )
+                }
               }
               return React.createElement(tag, elementProps, children)
             },

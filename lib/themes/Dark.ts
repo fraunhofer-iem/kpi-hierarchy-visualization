@@ -49,6 +49,7 @@ const DarkTheme: Theme = {
     "anchor:hover": new CSSProperties({
       backgroundColor: transparent,
       textDecoration: "none",
+      color: "inherit",
     }),
   },
   cytoscape: {

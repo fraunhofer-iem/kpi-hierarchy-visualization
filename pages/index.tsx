@@ -119,6 +119,10 @@ const Landing: NextPage = tippyfy((props: TooltipControl) => {
     [],
   )
 
+  const simulateTap = useCallback((nodeId: string) => {
+    cy.current.getElementById(nodeId).emit("tap")
+  }, [])
+
   return (
     <Page title={hierarchy.title}>
       <div style={{ height: "calc(100vh - 150px)", width: "100%" }}>
@@ -132,6 +136,7 @@ const Landing: NextPage = tippyfy((props: TooltipControl) => {
       <Description
         readme={hierarchy.readme}
         descriptionControl={descriptionControl}
+        simulateTap={simulateTap}
       />
     </Page>
   )

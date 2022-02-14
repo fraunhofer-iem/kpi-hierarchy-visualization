@@ -64,6 +64,12 @@ const DarkTheme: Theme = {
         },
       },
       {
+        selector: "node[?hidden]",
+        style: {
+          visibility: "hidden",
+        },
+      },
+      {
         selector: "node[label]",
         style: {
           label: "data(label)",

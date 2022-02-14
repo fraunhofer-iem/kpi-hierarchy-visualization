@@ -21,6 +21,7 @@ const Landing: NextPage = tippyfy((props: TooltipControl) => {
       layout?: any
       name?: string
       description?: string
+      hidden?: boolean
       children?: { id: string; name: string; description: string }[]
     }) => {
       elements.push(
@@ -30,6 +31,7 @@ const Landing: NextPage = tippyfy((props: TooltipControl) => {
           additionalAttributes: {
             description: currentNode.description,
             layout: currentNode.layout,
+            hidden: currentNode.hidden,
           },
         }),
       )

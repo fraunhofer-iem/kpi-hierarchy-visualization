@@ -1,4 +1,9 @@
 {
+  "name": "kpi-hierarchy-visualization",
+  "author": "Felix Barczewicz (https://github.com/DieserFelix)",
+  "version": "1.2.2",
+  "private": true,
+  "license": "GPL-3.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

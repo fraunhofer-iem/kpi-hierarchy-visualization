@@ -103,10 +103,15 @@ const DarkTheme: Theme = {
         style: {
           width: 2,
           "line-color": white.darken(0.2).rgba(),
-          "target-arrow-color": white.darken(0.2).rgba(),
-          "target-arrow-shape": "triangle",
           "loop-direction": "90deg",
           color: white.rgba(),
+        },
+      },
+      {
+        selector: "edge[?directed]",
+        style: {
+          "target-arrow-color": white.darken(0.2).rgba(),
+          "target-arrow-shape": "triangle",
         },
       },
       {

@@ -106,7 +106,14 @@ const LightTheme: Theme = {
         selector: "edge[?directed]",
         style: {
           "target-arrow-color": white.darken(0.2).rgba(),
-          "target-arrow-shape": "triangle",
+          "target-arrow-shape": "chevron",
+        },
+      },
+      {
+        selector: "edge[arrowShape]",
+        style: {
+          //@ts-ignore-line
+          "target-arrow-shape": "data(arrowShape)",
         },
       },
       {

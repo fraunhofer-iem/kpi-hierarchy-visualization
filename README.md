@@ -36,8 +36,10 @@ After cloning this repository, you need to add the file `hierarchy.json` to the 
         label: string | undefined,
         sourceLabel: string | undefined,
         targetLabel: string | undefined,
+        arrowShape: string | undefined, // set the target-arrow-shape of the edge, see [Cytoscape documentation](https://js.cytoscape.org/#style/edge-arrow)
         straight: boolean | undefined, // if true, edge is set to 'curve-style: bezier' instead of 'curve-style: taxi'
-        directed: boolean | undefined // if true, edge will not have an arrow pointing at the target
+        directed: boolean | undefined, // if true, edge will not have an arrow pointing at the target
+        style: any | undefined // an object of [Cytoscape](https://js.cytoscape.org/#style) edge styles, **Use only if necessary**
       }
     ]
   ]

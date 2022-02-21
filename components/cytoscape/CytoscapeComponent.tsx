@@ -1,5 +1,4 @@
 import cytoscape from "cytoscape"
-import cola from "cytoscape-cola"
 import dagre from "cytoscape-dagre"
 import popper from "cytoscape-popper"
 import { useEffect, useRef } from "react"
@@ -27,7 +26,6 @@ export default function CytoscapeComponent(props: Props) {
   useEffect(() => {
     if (!compareProps(prevProps.current, props)) {
       cytoscape.use(dagre)
-      cytoscape.use(cola)
       cy.current = cytoscape({
         container: container.current,
         layout: layout,

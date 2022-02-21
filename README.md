@@ -36,7 +36,7 @@ After cloning this repository, you need to add the file `hierarchy.json` to the 
         label: string | undefined,
         sourceLabel: string | undefined,
         targetLabel: string | undefined,
-        straight: boolean | undefined // if true, edge is set to 'curve-style: bezier' instead of 'curve-style: taxi'
+        straight: boolean | undefined, // if true, edge is set to 'curve-style: bezier' instead of 'curve-style: taxi'
         directed: boolean | undefined // if true, edge will not have an arrow pointing at the target
       }
     ]

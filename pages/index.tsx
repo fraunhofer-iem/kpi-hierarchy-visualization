@@ -53,19 +53,28 @@ const Landing: NextPage = tippyfy((props: TooltipControl) => {
     (currentEdge: {
       source: string
       target: string
+      arrowShape?: string
       sourceLabel?: string
       targetLabel?: string
       directed?: boolean
       label?: string
       straight?: boolean
+      style?: { [key: string]: any }
     }) => {
       elements.push(
-        Edge(currentEdge.source, currentEdge.target, currentEdge.directed, {
-          label: currentEdge.label,
-          sourceLabel: currentEdge.sourceLabel,
-          targetLabel: currentEdge.targetLabel,
-          straight: currentEdge.straight,
-        }),
+        Edge(
+          currentEdge.source,
+          currentEdge.target,
+          currentEdge.directed,
+          {
+            label: currentEdge.label,
+            sourceLabel: currentEdge.sourceLabel,
+            targetLabel: currentEdge.targetLabel,
+            straight: currentEdge.straight,
+            arrowShape: currentEdge.arrowShape,
+          },
+          currentEdge.style,
+        ),
       )
     },
   )

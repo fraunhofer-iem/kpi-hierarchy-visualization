@@ -15,77 +15,81 @@ const Landing: NextPage = tippyfy((props: TooltipControl) => {
   const { setTippy } = props
   const elements: cytoscape.ElementDefinition[] = []
 
-  hierarchy.nodes.forEach(
-    (currentNode: {
-      id: string
-      layout?: any
-      name?: string
-      description?: string
-      hidden?: boolean
-      children?: { id: string; name: string; description: string }[]
-    }) => {
-      elements.push(
-        Node({
-          id: currentNode.id,
-          label: currentNode.name ?? "",
-          additionalAttributes: {
-            description: currentNode.description,
-            layout: currentNode.layout,
-            hidden: currentNode.hidden,
-          },
-        }),
-      )
-      currentNode.children?.forEach((currentChild) => {
+  if (hierarchy.hasOwnProperty("nodes")) {
+    hierarchy["nodes"].forEach(
+      (currentNode: {
+        id: string
+        layout?: any
+        name?: string
+        description?: string
+        hidden?: boolean
+        children?: { id: string; name: string; description: string }[]
+      }) => {
         elements.push(
           Node({
-            id: currentChild.id,
-            label: currentChild.name,
+            id: currentNode.id,
+            label: currentNode.name ?? "",
             additionalAttributes: {
-              description: currentChild.description,
-              parent: currentNode.id,
+              description: currentNode.description,
+              layout: currentNode.layout,
+              hidden: currentNode.hidden,
             },
           }),
         )
-      })
-    },
-  )
-  hierarchy.edges.forEach(
-    (currentEdge: {
-      source: string
-      target: string
-      arrowShape?: string
-      sourceLabel?: string
-      targetLabel?: string
-      directed?: boolean
-      label?: string
-      straight?: boolean
-      style?: { [key: string]: any }
-    }) => {
-      elements.push(
-        Edge(
-          currentEdge.source,
-          currentEdge.target,
-          currentEdge.directed,
-          {
-            label: currentEdge.label,
-            sourceLabel: currentEdge.sourceLabel,
-            targetLabel: currentEdge.targetLabel,
-            straight: currentEdge.straight,
-            arrowShape: currentEdge.arrowShape,
-          },
-          currentEdge.style,
-        ),
-      )
-    },
-  )
+        currentNode.children?.forEach((currentChild) => {
+          elements.push(
+            Node({
+              id: currentChild.id,
+              label: currentChild.name,
+              additionalAttributes: {
+                description: currentChild.description,
+                parent: currentNode.id,
+              },
+            }),
+          )
+        })
+      },
+    )
+  }
+  if (hierarchy.hasOwnProperty("edges")) {
+    hierarchy["edges"].forEach(
+      (currentEdge: {
+        source: string
+        target: string
+        arrowShape?: string
+        sourceLabel?: string
+        targetLabel?: string
+        directed?: boolean
+        label?: string
+        straight?: boolean
+        style?: { [key: string]: any }
+      }) => {
+        elements.push(
+          Edge(
+            currentEdge.source,
+            currentEdge.target,
+            currentEdge.directed,
+            {
+              label: currentEdge.label,
+              sourceLabel: currentEdge.sourceLabel,
+              targetLabel: currentEdge.targetLabel,
+              straight: currentEdge.straight,
+              arrowShape: currentEdge.arrowShape,
+            },
+            currentEdge.style,
+          ),
+        )
+      },
+    )
+  }
 
   const cytoscapeControl = useCallback(
     (c: cytoscape.Core) => {
       if (cy.current == c) {
         return
       }
-      if (hierarchy.center) {
-        c.center(c.getElementById(hierarchy.center))
+      if (hierarchy.hasOwnProperty("center")) {
+        c.center(c.getElementById(hierarchy["center"]))
       }
       c.on("mouseover", "node", (event) => {
         const node: cytoscape.NodeSingular = event.target

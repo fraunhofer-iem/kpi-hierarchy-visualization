@@ -84,6 +84,9 @@ const Landing: NextPage = tippyfy((props: TooltipControl) => {
       if (cy.current == c) {
         return
       }
+      if (hierarchy.center) {
+        c.center(c.getElementById(hierarchy.center))
+      }
       c.on("mouseover", "node", (event) => {
         const node: cytoscape.NodeSingular = event.target
         if (!node.isParent()) {

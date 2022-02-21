@@ -7,13 +7,15 @@ After cloning this repository, you need to add the file `hierarchy.json` to the 
 {
   layout: cytoscape.LayoutOptions, // a native CytoscapeJS layout (or cytoscape-dagre) which will be applied to all nodes
   readme: string, // general information on the displayed hierarchy
+  center: string | undefined // ID of Cytoscape element the graph will be centered on
   title: string, // page title
   nodes: [
     // single node
     {
       id: string,
       name: string,
-      description: string // Markdown will be rendered in the information card
+      description: string, // Markdown will be rendered in the information card
+      hidden: boolean // if true, node will be added to Cytoscape but it will be set to 'visibility: hidden'
     }
     |
     // compound node

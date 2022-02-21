@@ -79,13 +79,13 @@ const DarkTheme: Theme = {
         },
       },
       {
-        selector: "node[?hover]",
+        selector: "node[?tapped], node[?hover]",
         style: {
           backgroundColor: white.darken(0.25).rgba(),
         },
       },
       {
-        selector: "node[!hover]",
+        selector: "node[!hover][!tapped]",
         style: {
           backgroundColor: white.darken(0.8).rgba(),
         },

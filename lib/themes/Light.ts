@@ -74,13 +74,13 @@ const LightTheme: Theme = {
         },
       },
       {
-        selector: "node[?hover]",
+        selector: "node[?tapped], node[?hover]",
         style: {
           backgroundColor: white.darken(0.03).rgba(),
         },
       },
       {
-        selector: "node[!hover]",
+        selector: "node[!hover][!tapped]",
         style: {
           backgroundColor: white.darken(0.01).rgba(),
         },

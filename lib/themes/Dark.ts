@@ -91,6 +91,17 @@ const DarkTheme: Theme = {
         },
       },
       {
+        selector: "node[?hinge]",
+        style: {
+          width: 5,
+          height: 5,
+          shape: "ellipse",
+          label: "",
+          backgroundColor: white.darken(0.2).rgba(),
+          "border-color": white.darken(0.2).rgba(),
+        },
+      },
+      {
         selector: "$node > node",
         style: {
           "border-width": "0px",

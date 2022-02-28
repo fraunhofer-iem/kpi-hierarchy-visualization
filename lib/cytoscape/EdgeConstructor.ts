@@ -1,6 +1,6 @@
 import { EdgeDataDefinition, ElementDefinition } from "cytoscape"
 
-export const Edge = (
+export const EdgeConstructor = (
   source: string,
   target: string,
   directed: boolean = true,

@@ -4,9 +4,44 @@ import tippyfy, { TooltipControl } from "tooltip-component"
 import { Description } from "../components/content/Description"
 import CytoscapeComponent from "../components/cytoscape/CytoscapeComponent"
 import { Page } from "../components/layout"
-import hierarchy from "../hierarchy.json"
-import { Edge, Node } from "../lib/cytoscape"
+import hierarchyJson from "../hierarchy.json"
+import { EdgeConstructor, NodeConstructor } from "../lib/cytoscape"
+import { CompoundNode, Hierarchy, Node } from "../lib/frontend"
 import { useUIContext } from "../lib/hooks"
+
+const defineNode = (node: CompoundNode | Node, parentNode?: string) => {
+  const nodes: cytoscape.NodeDefinition[] = []
+  if (!node.hasOwnProperty("children")) {
+    node = node as Node
+    nodes.push(
+      NodeConstructor({
+        id: node.id,
+        label: node.name,
+        additionalAttributes: {
+          description: node.description ?? "",
+          hinge: node.hinge,
+          hidden: node.hidden,
+          parent: parentNode,
+        },
+      }),
+    )
+  } else {
+    node = node as CompoundNode
+    nodes.push(
+      NodeConstructor({
+        id: node.id,
+        additionalAttributes: {
+          layout: node.layout,
+          hidden: node.hidden,
+        },
+      }),
+    )
+    node.children.forEach((currentChild) => {
+      nodes.push(...defineNode(currentChild, node.id))
+    })
+  }
+  return nodes
+}
 
 const Landing: NextPage = tippyfy((props: TooltipControl) => {
   const { theme } = useUIContext()
@@ -14,73 +49,30 @@ const Landing: NextPage = tippyfy((props: TooltipControl) => {
   const cy = useRef<cytoscape.Core | null>()
   const { setTippy } = props
   const elements: cytoscape.ElementDefinition[] = []
-
+  let hierarchy = hierarchyJson as Hierarchy
   if (hierarchy.hasOwnProperty("nodes")) {
-    hierarchy["nodes"].forEach(
-      (currentNode: {
-        id: string
-        layout?: any
-        name?: string
-        description?: string
-        hidden?: boolean
-        children?: { id: string; name: string; description: string }[]
-      }) => {
-        elements.push(
-          Node({
-            id: currentNode.id,
-            label: currentNode.name ?? "",
-            additionalAttributes: {
-              description: currentNode.description,
-              layout: currentNode.layout,
-              hidden: currentNode.hidden,
-            },
-          }),
-        )
-        currentNode.children?.forEach((currentChild) => {
-          elements.push(
-            Node({
-              id: currentChild.id,
-              label: currentChild.name,
-              additionalAttributes: {
-                description: currentChild.description,
-                parent: currentNode.id,
-              },
-            }),
-          )
-        })
-      },
-    )
+    hierarchy.nodes.forEach((currentNode) => {
+      elements.push(...defineNode(currentNode))
+    })
   }
   if (hierarchy.hasOwnProperty("edges")) {
-    hierarchy["edges"].forEach(
-      (currentEdge: {
-        source: string
-        target: string
-        arrowShape?: string
-        sourceLabel?: string
-        targetLabel?: string
-        directed?: boolean
-        label?: string
-        straight?: boolean
-        style?: { [key: string]: any }
-      }) => {
-        elements.push(
-          Edge(
-            currentEdge.source,
-            currentEdge.target,
-            currentEdge.directed,
-            {
-              label: currentEdge.label,
-              sourceLabel: currentEdge.sourceLabel,
-              targetLabel: currentEdge.targetLabel,
-              straight: currentEdge.straight,
-              arrowShape: currentEdge.arrowShape,
-            },
-            currentEdge.style,
-          ),
-        )
-      },
-    )
+    hierarchy.edges.forEach((currentEdge) => {
+      elements.push(
+        EdgeConstructor(
+          currentEdge.source,
+          currentEdge.target,
+          currentEdge.directed,
+          {
+            label: currentEdge.label,
+            sourceLabel: currentEdge.sourceLabel,
+            targetLabel: currentEdge.targetLabel,
+            straight: currentEdge.straight,
+            arrowShape: currentEdge.arrowShape,
+          },
+          currentEdge.style,
+        ),
+      )
+    })
   }
 
   const cytoscapeControl = useCallback(
@@ -128,7 +120,7 @@ const Landing: NextPage = tippyfy((props: TooltipControl) => {
       })
       cy.current = c
     },
-    [setTippy],
+    [setTippy, hierarchy],
   )
 
   const descriptionControl = useCallback(

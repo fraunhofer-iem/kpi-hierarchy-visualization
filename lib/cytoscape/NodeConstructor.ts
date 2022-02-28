@@ -1,6 +1,6 @@
 import { ElementDefinition, NodeDataDefinition } from "cytoscape"
 
-export const Node = (params: {
+export const NodeConstructor = (params: {
   id: string | number
   label?: string
   kind?: string
@@ -13,7 +13,7 @@ export const Node = (params: {
   const node: ElementDefinition = {
     data: {
       id: `${id}`,
-      label: `${label}`,
+      label: label ?? "",
       kind: `${kind}`,
       entity: `${id}`,
       ...additionalAttributes,

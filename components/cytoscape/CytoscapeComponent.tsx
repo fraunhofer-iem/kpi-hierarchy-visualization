@@ -2,7 +2,7 @@ import cytoscape from "cytoscape"
 import dagre from "cytoscape-dagre"
 import popper from "cytoscape-popper"
 import { useEffect, useRef } from "react"
-import { nodeExpansion } from "../../lib/cytoscape/extensions"
+import { labelPositioning, nodeExpansion } from "../../lib/cytoscape/extensions"
 import { compareProps } from "../../lib/frontend"
 interface Props {
   /**
@@ -45,6 +45,9 @@ export default function CytoscapeComponent(props: Props) {
       }
       if (!Object.getPrototypeOf(cy.current).nodeExpansion) {
         cytoscape.use(nodeExpansion)
+      }
+      if (!Object.getPrototypeOf(cy.current).labelPositioning) {
+        cytoscape.use(labelPositioning)
       }
 
       prevProps.current = props

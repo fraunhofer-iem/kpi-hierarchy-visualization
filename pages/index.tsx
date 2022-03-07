@@ -80,6 +80,7 @@ const Landing: NextPage = tippyfy((props: TooltipControl) => {
       if (cy.current == c) {
         return
       }
+      c.labelPositioning()
       if (hierarchy.hasOwnProperty("center")) {
         c.center(c.getElementById(hierarchy["center"]))
       }

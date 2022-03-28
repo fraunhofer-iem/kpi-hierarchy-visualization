@@ -56,7 +56,8 @@ const LightTheme: Theme = {
           "border-style": "solid",
           "border-width": "1px",
           "border-color": white.darken(0.1).rgba(),
-          shape: "rectangle",
+          // @ts-ignore-line
+          shape: "data(shape)",
           width: "label",
         },
       },
@@ -105,9 +106,17 @@ const LightTheme: Theme = {
         },
       },
       {
+        selector: "$node[label] > node",
+        style: {
+          "border-width": "1px",
+        },
+      },
+      {
         selector: "edge",
         style: {
           width: 2,
+          // @ts-ignore-line
+          "line-style": "data(lineStyle)",
           "line-color": white.darken(0.2).rgba(),
           "loop-direction": "90deg",
           "curve-style": "taxi",

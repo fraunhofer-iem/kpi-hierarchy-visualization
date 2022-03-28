@@ -26,13 +26,14 @@ interface Hierarchy {
 interface Node {
   id: string
   name: string
+  shape: string // set the shape of the node, see [Cytoscape documentation](https://js.cytoscape.org/#style/node-body)
   description: string // Markdown will be rendered in the information card
   hidden: boolean // if true, node will be added to Cytoscape but it will be set to 'visibility: hidden'
   hinge: boolean // if true, creates a 'hinge node'
 }
 ```
 
-A `hinge node` can be used as an artificial junction point between to edges. It is displayed as a circle in the colors of an edge. See below for a more concrete example.
+A `hinge node` can be used as an artificial junction point between two edges. It is displayed as a circle in the colors of an edge. See below for a more concrete example.
 
 ### Compound Nodes
 
@@ -41,6 +42,7 @@ A `hinge node` can be used as an artificial junction point between to edges. It 
 ```ts
 interface CompoundNode {
   id: string
+  name?: string
   layout?: cytoscape.LayoutOptions | cytoscapeDagre.DagreLayoutOptions // will be applied only to the compound node's children
   children: Node[]
   hidden: boolean // if true, subgraph will be added to Cytoscape but it will be set to 'visibility: hidden'
@@ -59,6 +61,7 @@ interface Edge {
   target: string
   directed?: boolean // if true, edge will not have an arrow pointing at the target
   arrowShape?: string // set the target-arrow-shape of the edge, see [Cytoscape documentation](https://js.cytoscape.org/#style/edge-arrow)
+  lineStyle?: string // set the line-style of the edge, see [Cytoscape documentation](https://js.cytoscape.org/#style/edge-line)
   sourceLabel?: string
   label?: string
   targetLabel?: string

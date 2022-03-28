@@ -22,6 +22,7 @@ const defineNode = (node: CompoundNode | Node, parentNode?: string) => {
           hinge: node.hinge,
           hidden: node.hidden,
           parent: parentNode,
+          shape: node.shape ?? "rectangle",
         },
       }),
     )
@@ -30,6 +31,7 @@ const defineNode = (node: CompoundNode | Node, parentNode?: string) => {
     nodes.push(
       NodeConstructor({
         id: node.id,
+        label: node.name,
         additionalAttributes: {
           layout: node.layout,
           hidden: node.hidden,
@@ -68,6 +70,7 @@ const Landing: NextPage = tippyfy((props: TooltipControl) => {
             targetLabel: currentEdge.targetLabel,
             straight: currentEdge.straight,
             arrowShape: currentEdge.arrowShape,
+            lineStyle: currentEdge.lineStyle ?? "solid",
           },
           currentEdge.style,
         ),

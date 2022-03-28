@@ -7,7 +7,7 @@ export const EdgeConstructor = (
   additionalAttributes: Omit<
     EdgeDataDefinition,
     "id" | "source" | "target" | "directed"
-  > & { arrowShape?: string } = {},
+  > & { arrowShape?: string; lineStyle?: string } = {},
   style: any = undefined,
 ): ElementDefinition => {
   const edge = {

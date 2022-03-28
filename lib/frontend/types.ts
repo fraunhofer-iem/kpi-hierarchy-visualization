@@ -10,12 +10,14 @@ interface Hideable {
 export interface Node extends Hideable {
   id: string
   name: string
+  shape?: string
   description: string
   hinge: boolean
 }
 
 export interface CompoundNode extends Hideable {
   id: string
+  name?: string
   layout?: cytoscape.LayoutOptions | cytoscapeDagre.DagreLayoutOptions
   children: Node[]
 }
@@ -29,6 +31,7 @@ export interface Edge {
   label?: string
   targetLabel?: string
   straight?: boolean
+  lineStyle?: string
   style?: { [key: string]: any }
 }
 

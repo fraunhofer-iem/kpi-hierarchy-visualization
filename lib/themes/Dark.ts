@@ -63,6 +63,8 @@ const DarkTheme: Theme = {
           // @ts-ignore-line
           shape: "data(shape)",
           width: "label",
+          height: "label",
+          padding: "5px",
         },
       },
       {
@@ -77,6 +79,7 @@ const DarkTheme: Theme = {
           label: "data(label)",
           "text-valign": "center",
           color: white.rgba(),
+          "text-wrap": "wrap",
         },
       },
       {
@@ -100,6 +103,8 @@ const DarkTheme: Theme = {
           label: "",
           backgroundColor: white.darken(0.2).rgba(),
           "border-color": white.darken(0.2).rgba(),
+          //@ts-ignore-line
+          padding: 0,
         },
       },
       {

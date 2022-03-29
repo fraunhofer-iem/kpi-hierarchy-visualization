@@ -59,6 +59,8 @@ const LightTheme: Theme = {
           // @ts-ignore-line
           shape: "data(shape)",
           width: "label",
+          height: "label",
+          padding: "5px",
         },
       },
       {
@@ -72,6 +74,7 @@ const LightTheme: Theme = {
         style: {
           label: "data(label)",
           "text-valign": "center",
+          "text-wrap": "wrap",
         },
       },
       {
@@ -95,6 +98,8 @@ const LightTheme: Theme = {
           label: "",
           backgroundColor: white.darken(0.2).rgba(),
           "border-color": white.darken(0.2).rgba(),
+          //@ts-ignore-line
+          padding: 0,
         },
       },
       {

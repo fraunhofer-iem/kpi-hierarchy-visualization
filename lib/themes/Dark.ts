@@ -83,6 +83,18 @@ const DarkTheme: Theme = {
         },
       },
       {
+        selector: "node[label][colorDark]",
+        style: {
+          color: "data(colorDark)",
+        },
+      },
+      {
+        selector: "node[label][borderDark]",
+        style: {
+          "border-color": "data(borderDark)",
+        },
+      },
+      {
         selector: "node[?tapped], node[?hover]",
         style: {
           backgroundColor: white.darken(0.25).rgba(),
@@ -92,6 +104,18 @@ const DarkTheme: Theme = {
         selector: "node[!hover][!tapped]",
         style: {
           backgroundColor: white.darken(0.8).rgba(),
+        },
+      },
+      {
+        selector: "node[!hover][!tapped][backgroundDark]",
+        style: {
+          backgroundColor: "data(backgroundDark)",
+        },
+      },
+      {
+        selector: "node[?tapped][backgroundDark], node[?hover][backgroundDark]",
+        style: {
+          backgroundColor: "data(backgroundDarkHover)",
         },
       },
       {

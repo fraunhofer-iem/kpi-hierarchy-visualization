@@ -13,6 +13,18 @@ export interface Node extends Hideable {
   shape?: string
   description: string
   hinge: boolean
+  theme?: {
+    dark?: {
+      background?: string
+      color?: string
+      border?: string
+    }
+    light?: {
+      background?: string
+      color?: string
+      border?: string
+    }
+  }
 }
 
 export interface CompoundNode extends Hideable {

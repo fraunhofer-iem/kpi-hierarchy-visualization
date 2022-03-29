@@ -30,6 +30,19 @@ interface Node {
   description: string // Markdown will be rendered in the information card
   hidden: boolean // if true, node will be added to Cytoscape but it will be set to 'visibility: hidden'
   hinge: boolean // if true, creates a 'hinge node'
+  theme?: {
+    // optional theme information for this specific node
+    dark?: {
+      background?: string
+      color?: string
+      border?: string
+    }
+    light?: {
+      background?: string
+      color?: string
+      border?: string
+    }
+  }
 }
 ```
 

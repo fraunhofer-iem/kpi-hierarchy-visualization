@@ -6,7 +6,7 @@ import CytoscapeComponent from "../components/cytoscape/CytoscapeComponent"
 import { Page } from "../components/layout"
 import hierarchyJson from "../hierarchy.json"
 import { EdgeConstructor, NodeConstructor } from "../lib/cytoscape"
-import { CompoundNode, Hierarchy, Node } from "../lib/frontend"
+import { Color, CompoundNode, Hierarchy, Node } from "../lib/frontend"
 import { useUIContext } from "../lib/hooks"
 
 const defineNode = (node: CompoundNode | Node, parentNode?: string) => {
@@ -23,6 +23,30 @@ const defineNode = (node: CompoundNode | Node, parentNode?: string) => {
           hidden: node.hidden,
           parent: parentNode,
           shape: node.shape ?? "rectangle",
+          colorDark: node.theme?.dark?.color,
+          borderDark: node.theme?.dark?.border,
+          backgroundDark: node.theme?.dark?.background,
+          backgroundDarkHover: new Color(
+            0,
+            0,
+            0,
+            0,
+            node.theme?.dark?.background,
+          )
+            .brighten(0.1)
+            .rgba(),
+          colorLight: node.theme?.dark?.color,
+          borderLight: node.theme?.dark?.border,
+          backgroundLight: node.theme?.dark?.background,
+          backgroundLightHover: new Color(
+            0,
+            0,
+            0,
+            0,
+            node.theme?.dark?.background,
+          )
+            .brighten(0.1)
+            .rgba(),
         },
       }),
     )

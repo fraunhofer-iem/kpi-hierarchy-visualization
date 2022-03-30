@@ -30,6 +30,19 @@ interface Node {
   description: string // Markdown will be rendered in the information card
   hidden: boolean // if true, node will be added to Cytoscape but it will be set to 'visibility: hidden'
   hinge: boolean // if true, creates a 'hinge node'
+  theme?: {
+    // optional theme information for this specific node
+    dark?: {
+      background?: string
+      color?: string
+      border?: string
+    }
+    light?: {
+      background?: string
+      color?: string
+      border?: string
+    }
+  }
 }
 ```
 
@@ -46,6 +59,20 @@ interface CompoundNode {
   layout?: cytoscape.LayoutOptions | cytoscapeDagre.DagreLayoutOptions // will be applied only to the compound node's children
   children: Node[]
   hidden: boolean // if true, subgraph will be added to Cytoscape but it will be set to 'visibility: hidden'
+  // optional theme information for this specific node
+  theme?: {
+    // optional theme information for this specific node
+    dark?: {
+      background?: string
+      color?: string
+      border?: string
+    }
+    light?: {
+      background?: string
+      color?: string
+      border?: string
+    }
+  }
 }
 ```
 

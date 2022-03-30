@@ -59,6 +59,8 @@ const LightTheme: Theme = {
           // @ts-ignore-line
           shape: "data(shape)",
           width: "label",
+          height: "label",
+          padding: "5px",
         },
       },
       {
@@ -72,6 +74,19 @@ const LightTheme: Theme = {
         style: {
           label: "data(label)",
           "text-valign": "center",
+          "text-wrap": "wrap",
+        },
+      },
+      {
+        selector: "node[label][colorLight]",
+        style: {
+          color: "data(colorLight)",
+        },
+      },
+      {
+        selector: "node[label][borderLight]",
+        style: {
+          "border-color": "data(borderLight)",
         },
       },
       {
@@ -87,14 +102,29 @@ const LightTheme: Theme = {
         },
       },
       {
+        selector: "node[!hover][!tapped][backgroundLight]",
+        style: {
+          backgroundColor: "data(backgroundLight)",
+        },
+      },
+      {
+        selector:
+          "node[?tapped][backgroundLight], node[?hover][backgroundLight]",
+        style: {
+          backgroundColor: "data(backgroundLightHover)",
+        },
+      },
+      {
         selector: "node[?hinge]",
         style: {
           width: 5,
           height: 5,
           shape: "ellipse",
           label: "",
-          backgroundColor: white.darken(0.2).rgba(),
-          "border-color": white.darken(0.2).rgba(),
+          backgroundColor: black.brighten(0.1).rgba(),
+          "border-color": black.brighten(0.1).rgba(),
+          //@ts-ignore-line
+          padding: 0,
         },
       },
       {
@@ -103,6 +133,24 @@ const LightTheme: Theme = {
           "border-width": "0px",
           shape: "rectangle",
           backgroundColor: white.darken(0.05).rgba(),
+        },
+      },
+      {
+        selector: "$node[backgroundLight] > node",
+        style: {
+          backgroundColor: "data(backgroundLight)",
+        },
+      },
+      {
+        selector: "$node[colorLight] > node",
+        style: {
+          color: "data(colorLight)",
+        },
+      },
+      {
+        selector: "$node[borderLight] > node",
+        style: {
+          "border-color": "data(borderLight)",
         },
       },
       {
@@ -117,7 +165,7 @@ const LightTheme: Theme = {
           width: 2,
           // @ts-ignore-line
           "line-style": "data(lineStyle)",
-          "line-color": white.darken(0.2).rgba(),
+          "line-color": black.brighten(0.1).rgba(),
           "loop-direction": "90deg",
           "curve-style": "taxi",
         },
@@ -125,7 +173,7 @@ const LightTheme: Theme = {
       {
         selector: "edge[?directed]",
         style: {
-          "target-arrow-color": white.darken(0.2).rgba(),
+          "target-arrow-color": black.brighten(0.1).rgba(),
           "target-arrow-shape": "chevron",
         },
       },

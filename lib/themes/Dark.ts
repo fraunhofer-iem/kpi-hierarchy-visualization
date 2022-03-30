@@ -63,6 +63,8 @@ const DarkTheme: Theme = {
           // @ts-ignore-line
           shape: "data(shape)",
           width: "label",
+          height: "label",
+          padding: "5px",
         },
       },
       {
@@ -77,6 +79,19 @@ const DarkTheme: Theme = {
           label: "data(label)",
           "text-valign": "center",
           color: white.rgba(),
+          "text-wrap": "wrap",
+        },
+      },
+      {
+        selector: "node[label][colorDark]",
+        style: {
+          color: "data(colorDark)",
+        },
+      },
+      {
+        selector: "node[label][borderDark]",
+        style: {
+          "border-color": "data(borderDark)",
         },
       },
       {
@@ -92,6 +107,18 @@ const DarkTheme: Theme = {
         },
       },
       {
+        selector: "node[!hover][!tapped][backgroundDark]",
+        style: {
+          backgroundColor: "data(backgroundDark)",
+        },
+      },
+      {
+        selector: "node[?tapped][backgroundDark], node[?hover][backgroundDark]",
+        style: {
+          backgroundColor: "data(backgroundDarkHover)",
+        },
+      },
+      {
         selector: "node[?hinge]",
         style: {
           width: 5,
@@ -100,6 +127,8 @@ const DarkTheme: Theme = {
           label: "",
           backgroundColor: white.darken(0.2).rgba(),
           "border-color": white.darken(0.2).rgba(),
+          //@ts-ignore-line
+          padding: 0,
         },
       },
       {
@@ -108,6 +137,24 @@ const DarkTheme: Theme = {
           "border-width": "0px",
           shape: "rectangle",
           backgroundColor: black.brighten(0.05).rgba(),
+        },
+      },
+      {
+        selector: "$node[backgroundDark] > node",
+        style: {
+          backgroundColor: "data(backgroundDark)",
+        },
+      },
+      {
+        selector: "$node[colorDark] > node",
+        style: {
+          color: "data(colorDark)",
+        },
+      },
+      {
+        selector: "$node[borderDark] > node",
+        style: {
+          "border-color": "data(borderDark)",
         },
       },
       {

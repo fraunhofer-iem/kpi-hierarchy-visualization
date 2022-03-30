@@ -4,7 +4,19 @@ export class Color {
   blue: number
   alpha?: number
 
-  constructor(red: number, green: number, blue: number, alpha: number = 1) {
+  constructor(
+    red: number,
+    green: number,
+    blue: number,
+    alpha: number = 1,
+    hex?: string,
+  ) {
+    if (hex) {
+      hex = hex.substring(1)
+      red = Number.parseInt(hex.substring(0, 2), 16)
+      green = Number.parseInt(hex.substring(2, 4), 16)
+      blue = Number.parseInt(hex.substring(4, 6), 16)
+    }
     this.red = red > 255 ? 255 : red < 0 ? 0 : red
     this.green = green > 255 ? 255 : green < 0 ? 0 : green
     this.blue = blue > 255 ? 255 : blue < 0 ? 0 : blue

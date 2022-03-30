@@ -140,6 +140,24 @@ const DarkTheme: Theme = {
         },
       },
       {
+        selector: "$node[backgroundDark] > node",
+        style: {
+          backgroundColor: "data(backgroundDark)",
+        },
+      },
+      {
+        selector: "$node[colorDark] > node",
+        style: {
+          color: "data(colorDark)",
+        },
+      },
+      {
+        selector: "$node[borderDark] > node",
+        style: {
+          "border-color": "data(borderDark)",
+        },
+      },
+      {
         selector: "$node[label] > node",
         style: {
           "border-width": "1px",

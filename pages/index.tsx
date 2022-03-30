@@ -11,61 +11,56 @@ import { useUIContext } from "../lib/hooks"
 
 const defineNode = (node: CompoundNode | Node, parentNode?: string) => {
   const nodes: cytoscape.NodeDefinition[] = []
+  let additionalAttributes: Omit<
+    cytoscape.NodeDataDefinition,
+    "id" | "label" | "kind" | "entity"
+  > = {}
   if (!node.hasOwnProperty("children")) {
     node = node as Node
-    nodes.push(
-      NodeConstructor({
-        id: node.id,
-        label: node.name,
-        additionalAttributes: {
-          description: node.description ?? "",
-          hinge: node.hinge,
-          hidden: node.hidden,
-          parent: parentNode,
-          shape: node.shape ?? "rectangle",
-          colorDark: node.theme?.dark?.color,
-          borderDark: node.theme?.dark?.border,
-          backgroundDark: node.theme?.dark?.background,
-          backgroundDarkHover: new Color(
-            0,
-            0,
-            0,
-            0,
-            node.theme?.dark?.background,
-          )
-            .brighten(0.1)
-            .rgba(),
-          colorLight: node.theme?.dark?.color,
-          borderLight: node.theme?.dark?.border,
-          backgroundLight: node.theme?.dark?.background,
-          backgroundLightHover: new Color(
-            0,
-            0,
-            0,
-            0,
-            node.theme?.dark?.background,
-          )
-            .brighten(0.1)
-            .rgba(),
-        },
-      }),
-    )
+    ;(additionalAttributes.description = node.description ?? ""),
+      (additionalAttributes.hinge = node.hinge)
+    additionalAttributes.parent = parentNode
+    additionalAttributes.shape = node.shape ?? "rectangle"
   } else {
     node = node as CompoundNode
-    nodes.push(
-      NodeConstructor({
-        id: node.id,
-        label: node.name,
-        additionalAttributes: {
-          layout: node.layout,
-          hidden: node.hidden,
-        },
-      }),
-    )
+    additionalAttributes.layout = node.layout
+
     node.children.forEach((currentChild) => {
       nodes.push(...defineNode(currentChild, node.id))
     })
   }
+  additionalAttributes.hidden = node.hidden
+  additionalAttributes.colorDark = node.theme?.dark?.color
+  additionalAttributes.borderDark = node.theme?.dark?.border
+  additionalAttributes.backgroundDark = node.theme?.dark?.background
+  additionalAttributes.backgroundDarkHover = new Color(
+    0,
+    0,
+    0,
+    0,
+    node.theme?.dark?.background,
+  )
+    .brighten(0.1)
+    .rgba()
+  additionalAttributes.colorLight = node.theme?.light?.color
+  additionalAttributes.borderLight = node.theme?.light?.border
+  additionalAttributes.backgroundLight = node.theme?.light?.background
+  additionalAttributes.backgroundLightHover = new Color(
+    0,
+    0,
+    0,
+    0,
+    node.theme?.light?.background,
+  )
+    .brighten(0.1)
+    .rgba()
+  nodes.push(
+    NodeConstructor({
+      id: node.id,
+      label: node.name,
+      additionalAttributes: additionalAttributes,
+    }),
+  )
   return nodes
 }
 

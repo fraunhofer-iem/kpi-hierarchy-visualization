@@ -7,12 +7,8 @@ export enum NodeTypes {
 interface Hideable {
   hidden: boolean
 }
-export interface Node extends Hideable {
-  id: string
-  name: string
-  shape?: string
-  description: string
-  hinge: boolean
+
+interface Themeable {
   theme?: {
     dark?: {
       background?: string
@@ -26,8 +22,15 @@ export interface Node extends Hideable {
     }
   }
 }
+export interface Node extends Hideable, Themeable {
+  id: string
+  name: string
+  shape?: string
+  description: string
+  hinge: boolean
+}
 
-export interface CompoundNode extends Hideable {
+export interface CompoundNode extends Hideable, Themeable {
   id: string
   name?: string
   layout?: cytoscape.LayoutOptions | cytoscapeDagre.DagreLayoutOptions

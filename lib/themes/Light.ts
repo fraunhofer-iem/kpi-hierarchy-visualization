@@ -102,15 +102,16 @@ const LightTheme: Theme = {
         },
       },
       {
-        selector: "node[!hover][!tapped][backgroundDark]",
+        selector: "node[!hover][!tapped][backgroundLight]",
         style: {
-          backgroundColor: "data(backgroundDark)",
+          backgroundColor: "data(backgroundLight)",
         },
       },
       {
-        selector: "node[?tapped][backgroundDark], node[?hover][backgroundDark]",
+        selector:
+          "node[?tapped][backgroundLight], node[?hover][backgroundLight]",
         style: {
-          backgroundColor: "data(backgroundDarkHover)",
+          backgroundColor: "data(backgroundLightHover)",
         },
       },
       {
@@ -120,8 +121,8 @@ const LightTheme: Theme = {
           height: 5,
           shape: "ellipse",
           label: "",
-          backgroundColor: white.darken(0.2).rgba(),
-          "border-color": white.darken(0.2).rgba(),
+          backgroundColor: black.brighten(0.1).rgba(),
+          "border-color": black.brighten(0.1).rgba(),
           //@ts-ignore-line
           padding: 0,
         },
@@ -132,6 +133,24 @@ const LightTheme: Theme = {
           "border-width": "0px",
           shape: "rectangle",
           backgroundColor: white.darken(0.05).rgba(),
+        },
+      },
+      {
+        selector: "$node[backgroundLight] > node",
+        style: {
+          backgroundColor: "data(backgroundLight)",
+        },
+      },
+      {
+        selector: "$node[colorLight] > node",
+        style: {
+          color: "data(colorLight)",
+        },
+      },
+      {
+        selector: "$node[borderLight] > node",
+        style: {
+          "border-color": "data(borderLight)",
         },
       },
       {
@@ -146,7 +165,7 @@ const LightTheme: Theme = {
           width: 2,
           // @ts-ignore-line
           "line-style": "data(lineStyle)",
-          "line-color": white.darken(0.2).rgba(),
+          "line-color": black.brighten(0.1).rgba(),
           "loop-direction": "90deg",
           "curve-style": "taxi",
         },
@@ -154,7 +173,7 @@ const LightTheme: Theme = {
       {
         selector: "edge[?directed]",
         style: {
-          "target-arrow-color": white.darken(0.2).rgba(),
+          "target-arrow-color": black.brighten(0.1).rgba(),
           "target-arrow-shape": "chevron",
         },
       },

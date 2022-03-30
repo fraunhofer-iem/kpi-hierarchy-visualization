@@ -59,6 +59,20 @@ interface CompoundNode {
   layout?: cytoscape.LayoutOptions | cytoscapeDagre.DagreLayoutOptions // will be applied only to the compound node's children
   children: Node[]
   hidden: boolean // if true, subgraph will be added to Cytoscape but it will be set to 'visibility: hidden'
+  // optional theme information for this specific node
+  theme?: {
+    // optional theme information for this specific node
+    dark?: {
+      background?: string
+      color?: string
+      border?: string
+    }
+    light?: {
+      background?: string
+      color?: string
+      border?: string
+    }
+  }
 }
 ```
 
